@@ -80,8 +80,29 @@
     box-shadow: 0 4px 20px rgba(31,185,84,0.35);
   }
   .nav-cta:hover{ transform: translateY(-2px); box-shadow: 0 8px 26px rgba(31,185,84,0.5) !important; background:linear-gradient(135deg,var(--amarelo2),var(--amarelo)) !important; color:#0a0d09 !important;}
-  .burger{ display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; }
-  .burger span{ width:26px; height:3px; background:var(--amarelo); border-radius:3px; }
+  .burger{
+    display:none; align-items:center; justify-content:center;
+    width:46px; height:46px; cursor:pointer;
+    background: var(--vidro); border:1px solid var(--vidro-borda);
+    border-radius:14px; backdrop-filter: blur(14px) saturate(160%);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08);
+    position:relative; z-index:120; flex-shrink:0;
+    transition: background .35s ease, border-color .35s ease, transform .3s ease;
+  }
+  .burger:active{ transform: scale(0.92); }
+  .burger-lines{ position:relative; width:20px; height:14px; }
+  .burger-lines span{
+    position:absolute; left:0; width:100%; height:2px; border-radius:2px;
+    background: linear-gradient(90deg, var(--amarelo2), var(--verde-brilho));
+    transition: transform .4s cubic-bezier(.2,.8,.2,1), opacity .3s ease, top .4s cubic-bezier(.2,.8,.2,1), width .3s ease;
+  }
+  .burger-lines span:nth-child(1){ top:0; }
+  .burger-lines span:nth-child(2){ top:6px; width:70%; }
+  .burger-lines span:nth-child(3){ top:12px; }
+  .burger.open{ border-color: rgba(31,185,84,0.5); background: rgba(31,185,84,0.1); }
+  .burger.open .burger-lines span:nth-child(1){ top:6px; transform: rotate(45deg); }
+  .burger.open .burger-lines span:nth-child(2){ opacity:0; width:0; }
+  .burger.open .burger-lines span:nth-child(3){ top:6px; transform: rotate(-45deg); }
 
   /* HERO */
   .hero{
@@ -219,6 +240,17 @@
 
   /* INSTAGRAM */
   #instagram{ text-align:center; }
+  .insta-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:24px; max-width:1100px; margin:0 auto 60px; text-align:left;
+  }
+  .insta-grid .instagram-media{
+    margin:0 auto !important; width:100% !important; max-width:100% !important;
+    border-radius:24px !important; overflow:hidden;
+    box-shadow: 0 16px 44px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+    border:1px solid var(--vidro-borda) !important;
+    background: var(--vidro) !important;
+  }
   .insta-card{
     max-width:560px; margin:0 auto; background:var(--vidro); border:1px solid var(--vidro-borda);
     border-radius:28px; padding:50px 40px; backdrop-filter: blur(20px) saturate(160%);
@@ -266,11 +298,13 @@
   .reveal.show{ opacity:1; transform:none; }
 
   @media (max-width: 860px){
-    .nav-links{ position:fixed; top:70px; right:16px; left:16px; flex-direction:column;
+    nav{ position:relative; justify-content:center; }
+    .nav-logo{ position:absolute; left:50%; transform:translateX(-50%); }
+    .nav-links{ position:fixed; top:76px; right:16px; left:16px; flex-direction:column;
       background:rgba(10,13,9,0.92); backdrop-filter: blur(20px); border:1px solid var(--vidro-borda);
       border-radius:20px; padding:16px; display:none; gap:4px; }
     .nav-links.open{ display:flex; }
-    .burger{ display:flex; }
+    .burger{ display:flex; margin-left:auto; }
     .sobre-grid, .terr-wrap{ grid-template-columns:1fr; }
     .numero-item:not(:last-child)::after{ display:none; }
   }
@@ -293,7 +327,9 @@
     <li><a href="#instagram">Instagram</a></li>
     <li><a class="nav-cta" href="#cadastro">Cadastre-se</a></li>
   </ul>
-  <button class="burger" id="burger" aria-label="menu"><span></span><span></span><span></span></button>
+  <button class="burger" id="burger" aria-label="menu">
+    <span class="burger-lines"><span></span><span></span><span></span></span>
+  </button>
 </nav>
 
 <section class="hero" id="topo">
@@ -340,7 +376,7 @@
 
 <section id="fazemos">
   <span class="section-tag reveal">02 · Na prática</span>
-  <h2 class="section-title reveal">O que a gente <span class="hl">fazemos</span></h2>
+  <h2 class="section-title reveal">O que nós <span class="hl">fazemos</span></h2>
   <p class="section-lead reveal">Nosso compromisso é simples: informar pra empoderar. Artista que conhece seus direitos e os caminhos do fomento cultural é artista que ocupa espaço.</p>
   <div class="faz-grid">
     <div class="faz-card reveal">
@@ -386,6 +422,15 @@
 <section id="instagram">
   <span class="section-tag reveal">04 · Conecta com a gente</span>
   <h2 class="section-title reveal">Segue o <span class="hl">movimento</span></h2>
+  <p class="section-lead reveal">Um recorte do que a gente já publicou — arte, bastidor e cultura direto da quebrada.</p>
+
+  <div class="insta-grid">
+    <div class="reveal"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DaSz5-7lIJP/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote></div>
+    <div class="reveal"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZX66r1lA7m/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote></div>
+    <div class="reveal"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DXsUDyLjXQv/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote></div>
+    <div class="reveal"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DXB6s8BFiLc/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote></div>
+  </div>
+
   <div class="insta-card reveal">
     <div class="insta-icon">📷</div>
     <h3>@entornocria</h3>
@@ -393,6 +438,7 @@
     <a class="follow-btn" href="https://www.instagram.com/entornocria" target="_blank">Seguir no Instagram</a>
   </div>
 </section>
+<script async src="//www.instagram.com/embed.js"></script>
 
 <section id="cadastro">
   <div class="form-card reveal">
@@ -417,8 +463,8 @@
 <script>
   const burger = document.getElementById('burger');
   const navLinks = document.getElementById('navLinks');
-  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+  burger.addEventListener('click', () => { navLinks.classList.toggle('open'); burger.classList.toggle('open'); });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navLinks.classList.remove('open'); burger.classList.remove('open'); }));
 
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('show'); } });
